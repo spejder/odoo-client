@@ -20,7 +20,6 @@
 	    "Spejder\\": "src/"
 	}
     },
-    "target-dir": "Spejder/Odoo",
     "minimum-stability": "dev",
     "require-dev": {
         "phpstan/phpstan": "^0.12.0@dev",
