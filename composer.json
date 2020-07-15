@@ -12,9 +12,8 @@
         }
     ],
     "require": {
-        "zendframework/zend-xmlrpc": "~2.3",
-        "zendframework/zendxml": "1.0.*",
-        "zendframework/zend-http": "~2.3"
+        "laminas/laminas-xmlrpc": "^2.9",
+        "laminas/laminas-http": "^2.12"
     },
     "autoload": {
         "psr-0": { "Jsg\\": "" }

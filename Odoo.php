@@ -9,8 +9,8 @@
 
 namespace Jsg\Odoo;
 
-use Zend\Http\Client as HttpClient;
-use Zend\XmlRpc\Client as XmlRpcClient;
+use Laminas\Http\Client as HttpClient;
+use Laminas\XmlRpc\Client as XmlRpcClient;
 
 /**
  * Odoo is an PHP client for the xmlrpc api of Odoo, formerly known as OpenERP.
@@ -351,8 +351,8 @@ class Odoo
 
 		$this->client = new XmlRpcClient($this->host . '/' . $path, $this->httpClient);
 
-		// The introspection done by the Zend XmlRpc client is probably specific
-		// to Zend XmlRpc servers. To prevent polution of the Odoo logs with errors
+		// The introspection done by the Laminas XmlRpc client is probably specific
+		// to Laminas XmlRpc servers. To prevent polution of the Odoo logs with errors
 		// resulting from this introspection calls we disable it.
 		$this->client->setSkipSystemLookup(true);
 
