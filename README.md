@@ -15,7 +15,7 @@ __Known issues__
 Instantiate a new client.
 
 ```php
-use Jsg\Odoo\Odoo;
+use Spejder\Odoo\Odoo;
 
 $url = 'example.odoo.com/xmlrpc/2';
 $database = 'example-database';
@@ -30,7 +30,7 @@ For the client to work you have to include the `/xmlrpc/2` part of the url.
 When you need to tweak the HTTP client used by the XML-RPC client, you can inject a custom HTTP client via the constructor or the `Odoo::setHttpClient` method.
 
 ```php
-use Jsg\Odoo\Odoo;
+use Spejder\Odoo\Odoo;
 use Zend\Http\Client as HttpClient;
 
 $httpClient = new HttpClient(null, [

@@ -1,9 +1,9 @@
 {
-    "name": "jacobsteringa/odoo-client",
+    "name": "spejder/odoo-client",
     "type": "library",
     "description": "A PHP Client for Odoo",
     "keywords": [],
-    "homepage": "https://github.com/jacobsteringa/OdooClient",
+    "homepage": "https://github.com/spejder/odoo-client",
     "license": "MIT",
     "authors": [
         {
@@ -17,10 +17,10 @@
     },
     "autoload": {
         "psr-4": {
-	    "Jsg\\": "src/"
+	    "Spejder\\": "src/"
 	}
     },
-    "target-dir": "Jsg/Odoo",
+    "target-dir": "Spejder/Odoo",
     "minimum-stability": "dev",
     "require-dev": {
         "phpstan/phpstan": "^0.12.0@dev",

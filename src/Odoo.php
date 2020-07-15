@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Jsg\Odoo;
+namespace Spejder\Odoo;
 
 use Laminas\Http\Client as HttpClient;
 use Laminas\XmlRpc\Client as XmlRpcClient;
