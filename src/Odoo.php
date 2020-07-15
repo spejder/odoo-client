@@ -196,6 +196,33 @@ class Odoo
     }
 
     /**
+     * Search_read model(s)
+     *
+     * @param string  $model  Model
+     * @param array   $fields Index array of fields to fetch, an empty array fetches all fields
+     * @param array   $data   Array of criteria
+     * @param integer $offset Offset
+     * @param integer $limit  Max results
+     *
+     * @return array An array of models
+     */
+    public function searchRead($model, $data = array(), $fields = array(), $offset = 0, $limit = 100)
+    {
+        $params = $this->buildParams(array(
+            $model,
+            'search_read',
+            $data,
+            $fields,
+            $offset,
+            $limit
+        ));
+
+        $response = $this->getClient('object')->call('execute', $params);
+
+        return $response;
+    }
+
+    /**
      * Update model(s)
      *
      * @param string $model  Model
