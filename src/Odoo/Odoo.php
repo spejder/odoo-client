@@ -83,14 +83,19 @@ class Odoo
     /**
      * Odoo constructor
      *
-     * @param string     $host       The url
-     * @param string     $database   The database to log into
-     * @param string     $user       The username
-     * @param string     $password   Password of the user
+     * @param string $host The url
+     * @param string $database The database to log into
+     * @param string $user The username
+     * @param string $password Password of the user
      * @param HttpClient $httpClient An optional custom http client to initialize the XmlRpcClient with
      */
-    public function __construct($host, $database, $user, $password, HttpClient $httpClient = null)
-    {
+    public function __construct(
+        string $host,
+        string $database,
+        string $user,
+        string $password,
+        ?HttpClient $httpClient = null
+    ) {
         $this->host = $host;
         $this->database = $database;
         $this->user = $user;
@@ -101,9 +106,9 @@ class Odoo
     /**
      * Get version
      *
-     * @return array Odoo version
+     * @return array<mixed> Odoo version
      */
-    public function version()
+    public function version(): array
     {
         $response = $this->getClient('common')->call('version');
 
@@ -115,7 +120,7 @@ class Odoo
      *
      * @return string Current timezone
      */
-    public function timezone()
+    public function timezone(): string
     {
         $params = array(
             $this->database,
@@ -129,14 +134,14 @@ class Odoo
     /**
      * Search models
      *
-     * @param string  $model  Model
-     * @param array   $data   Array of criteria
+     * @param string $model Model
+     * @param array<mixed> $data Array of criteria
      * @param integer $offset Offset
-     * @param integer $limit  Max results
+     * @param integer $limit Max results
      *
-     * @return array Array of model id's
+     * @return array<integer> Array of model id's
      */
-    public function search($model, $data, $offset = 0, $limit = 100)
+    public function search(string $model, array $data, int $offset = 0, int $limit = 100): array
     {
         $params = $this->buildParams(array(
             $model,
@@ -155,11 +160,11 @@ class Odoo
      * Create model
      *
      * @param string $model Model
-     * @param array  $data  Array of fields with data (format: ['field' => 'value'])
+     * @param array<mixed> $data Array of fields with data (format: ['field' => 'value'])
      *
      * @return integer Created model id
      */
-    public function create($model, $data)
+    public function create(string $model, array $data): int
     {
         $params = $this->buildParams(array(
             $model,
@@ -176,12 +181,12 @@ class Odoo
      * Read model(s)
      *
      * @param string $model  Model
-     * @param array  $ids    Array of model id's
-     * @param array  $fields Index array of fields to fetch, an empty array fetches all fields
+     * @param array<int> $ids Array of model id's
+     * @param array<mixed> $fields Index array of fields to fetch, an empty array fetches all fields
      *
-     * @return array An array of models
+     * @return array<mixed> An array of models
      */
-    public function read($model, $ids, $fields = array())
+    public function read(string $model, array $ids, array $fields = array()): array
     {
         $params = $this->buildParams(array(
             $model,
@@ -198,16 +203,21 @@ class Odoo
     /**
      * Search_read model(s)
      *
-     * @param string  $model  Model
-     * @param array   $fields Index array of fields to fetch, an empty array fetches all fields
-     * @param array   $data   Array of criteria
+     * @param string $model Model
+     * @param array<mixed> $fields Index array of fields to fetch, an empty array fetches all fields
+     * @param array<mixed> $data Array of criteria
      * @param integer $offset Offset
-     * @param integer $limit  Max results
+     * @param integer $limit Max results
      *
-     * @return array An array of models
+     * @return array<mixed> An array of models
      */
-    public function searchRead($model, $data = array(), $fields = array(), $offset = 0, $limit = 100)
-    {
+    public function searchRead(
+        string $model,
+        array $data = array(),
+        array $fields = array(),
+        int $offset = 0,
+        int $limit = 100
+    ): array {
         $params = $this->buildParams(array(
             $model,
             'search_read',
@@ -225,13 +235,13 @@ class Odoo
     /**
      * Update model(s)
      *
-     * @param string $model  Model
-     * @param array  $ids    Array of model id's
-     * @param array  $fields A associative array (format: ['field' => 'value'])
+     * @param string $model Model
+     * @param array<int> $ids Array of model id's
+     * @param array<mixed> $fields A associative array (format: ['field' => 'value'])
      *
-     * @return array
+     * @return array<mixed>
      */
-    public function write($model, $ids, $fields)
+    public function write(string $model, array $ids, array $fields): array
     {
         $params = $this->buildParams(array(
             $model,
@@ -249,11 +259,11 @@ class Odoo
      * Unlink model(s)
      *
      * @param string $model Model
-     * @param array  $ids   Array of model id's
+     * @param array<int> $ids Array of model id's
      *
      * @return boolean True is successful
      */
-    public function unlink($model, $ids)
+    public function unlink(string $model, array $ids): bool
     {
         $params = $this->buildParams(array(
             $model,
@@ -268,12 +278,12 @@ class Odoo
      * Get report for model
      *
      * @param string $model Model
-     * @param array  $ids   Array of id's, for this method it should typically be an array with one id
-     * @param string $type  Report type
+     * @param array<int> $ids Array of id's, for this method it should typically be an array with one id
+     * @param string $type Report type
      *
      * @return mixed A report file
      */
-    public function getReport($model, $ids, $type = 'qweb-pdf')
+    public function getReport(string $model, array $ids, string $type = 'qweb-pdf'): mixed
     {
         $params = $this->buildParams(array(
             $model,
@@ -312,7 +322,7 @@ class Odoo
      *
      * @return string
      */
-    public function getLastRequest()
+    public function getLastRequest(): string
     {
         return $this->getClient()->getLastRequest();
     }
@@ -322,7 +332,7 @@ class Odoo
      *
      * @return string
      */
-    public function getLastResponse()
+    public function getLastResponse(): string
     {
         return $this->getClient()->getLastResponse();
     }
@@ -340,9 +350,9 @@ class Odoo
     /**
      * Build parameters
      *
-     * @param array  $params Array of params to append to the basic params
+     * @param array<mixed> $params Array of params to append to the basic params
      *
-     * @return array
+     * @return array<mixed>
      */
     protected function buildParams(array $params): array
     {
@@ -364,7 +374,7 @@ class Odoo
      *
      * @return XmlRpcClient
      */
-    protected function getClient($path = null)
+    protected function getClient(?string $path = null): XmlRpcClient
     {
         if ($path === null) {
             return $this->client;
@@ -391,7 +401,7 @@ class Odoo
      *
      * @return int $uid
      */
-    protected function uid()
+    protected function uid(): int
     {
         if ($this->uid === null) {
             $client = $this->getClient('common');
