@@ -122,11 +122,11 @@ class Odoo
      */
     public function timezone(): string
     {
-        $params = array(
+        $params = [
             $this->database,
             $this->user,
             $this->password
-        );
+        ];
 
         return $this->getClient('common')->call('timezone_get', $params);
     }
@@ -143,13 +143,13 @@ class Odoo
      */
     public function search(string $model, array $data, int $offset = 0, int $limit = 100): array
     {
-        $params = $this->buildParams(array(
+        $params = $this->buildParams([
             $model,
             'search',
             $data,
             $offset,
             $limit
-        ));
+        ]);
 
         $response = $this->getClient('object')->call('execute', $params);
 
@@ -166,11 +166,11 @@ class Odoo
      */
     public function create(string $model, array $data): int
     {
-        $params = $this->buildParams(array(
+        $params = $this->buildParams([
             $model,
             'create',
             $data
-        ));
+        ]);
 
         $response = $this->getClient('object')->call('execute', $params);
 
@@ -186,14 +186,14 @@ class Odoo
      *
      * @return array<mixed> An array of models
      */
-    public function read(string $model, array $ids, array $fields = array()): array
+    public function read(string $model, array $ids, array $fields = []): array
     {
-        $params = $this->buildParams(array(
+        $params = $this->buildParams([
             $model,
             'read',
             $ids,
             $fields
-        ));
+        ]);
 
         $response = $this->getClient('object')->call('execute', $params);
 
@@ -213,19 +213,19 @@ class Odoo
      */
     public function searchRead(
         string $model,
-        array $data = array(),
-        array $fields = array(),
+        array $data = [],
+        array $fields = [],
         int $offset = 0,
         int $limit = 100
     ): array {
-        $params = $this->buildParams(array(
+        $params = $this->buildParams([
             $model,
             'search_read',
             $data,
             $fields,
             $offset,
             $limit
-        ));
+        ]);
 
         $response = $this->getClient('object')->call('execute', $params);
 
@@ -243,12 +243,12 @@ class Odoo
      */
     public function write(string $model, array $ids, array $fields): array
     {
-        $params = $this->buildParams(array(
+        $params = $this->buildParams([
             $model,
             'write',
             $ids,
             $fields
-        ));
+        ]);
 
         $response = $this->getClient('object')->call('execute', $params);
 
@@ -265,11 +265,11 @@ class Odoo
      */
     public function unlink(string $model, array $ids): bool
     {
-        $params = $this->buildParams(array(
+        $params = $this->buildParams([
             $model,
             'unlink',
             $ids
-        ));
+        ]);
 
         return $this->getClient('object')->call('execute', $params);
     }
@@ -285,7 +285,7 @@ class Odoo
      */
     public function getReport(string $model, array $ids, string $type = 'qweb-pdf'): mixed
     {
-        $params = $this->buildParams(array(
+        $params = $this->buildParams([
             $model,
             $ids,
             array(
@@ -293,7 +293,7 @@ class Odoo
                 'id' => $ids[0],
                 'report_type' => $type
             )
-        ));
+        ]);
 
         $client = $this->getClient('report');
 
@@ -304,7 +304,7 @@ class Odoo
         while (!$state) {
             $report = $client->call(
                 'report_get',
-                $this->buildParams(array($reportId))
+                $this->buildParams([$reportId])
             );
 
             $state = $report['state'];
@@ -356,11 +356,11 @@ class Odoo
      */
     protected function buildParams(array $params): array
     {
-        return array_merge(array(
+        return array_merge([
             $this->database,
             $this->uid(),
             $this->password
-        ), $params);
+        ], $params);
     }
 
     /**
@@ -406,11 +406,11 @@ class Odoo
         if ($this->uid === null) {
             $client = $this->getClient('common');
 
-            $this->uid = $client->call('login', array(
+            $this->uid = $client->call('login', [
                 $this->database,
                 $this->user,
                 $this->password
-            ));
+            ]);
         }
 
         return $this->uid;
