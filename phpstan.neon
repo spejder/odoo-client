@@ -4,4 +4,3 @@ parameters:
     - .
   excludes_analyse:
     - vendor
-  checkMissingIterableValueType: false
