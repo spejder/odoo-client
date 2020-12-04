@@ -8,7 +8,7 @@ OdooClient is an Odoo client for PHP. It is inspired on [OpenERP API][1] from si
 
 This library should work with Odoo 8 and 9. If you find any any incompatibilities, please create an issue or submit a pull request.
 
-__Known issues__
+### Known issues
 
 - The `Odoo::getReport()` method in v0.2.2 and lower does not work with Odoo 9.
 
@@ -130,6 +130,6 @@ $report = $client->getReport('res.partner', $ids);
 
 [1]: https://bitbucket.org/simbigo/openerp-api
 
-# License
+## License
 
 MIT License. Copyright (c) 2014 Jacob Steringa.
