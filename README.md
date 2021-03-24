@@ -2,7 +2,7 @@
 
 OdooClient is an Odoo client for PHP. It is inspired on [OpenERP API][1] from simbigo and uses a more or less similar API. Instead of an own XML-RPC client it depends on the XML-RPC and XML libraries from Laminas (formerly Zend Framework).
 
-:information_source: This is a fork of the inactive [jacobsteringa/odoo-client](https://packagist.org/packages/jacobsteringa/odoo-client). Dependencies have been updated and code style modernized to PSR-12. Actual credit for the code goes to @jacobsteringa :heart:
+:information_source: This is a fork of the inactive [jacobsteringa/odoo-client](https://packagist.org/packages/jacobsteringa/odoo-client). Dependencies have been updated and code style modernized to PSR-12. Actual credit for the code goes to [@jacobsteringa](https://github.com/jacobsteringa) :heart:
 
 ## Supported versions
 
