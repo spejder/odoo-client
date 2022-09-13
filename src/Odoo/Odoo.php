@@ -34,9 +34,9 @@ class Odoo
     /**
      * Unique identifier for current user
      *
-     * @var integer
+     * @var integer|null
      */
-    protected $uid;
+    protected $uid = null;
 
     /**
      * Current users username
@@ -112,7 +112,7 @@ class Odoo
     {
         $response = $this->getClient('common')->call('version');
 
-        return $response;
+        return is_array($response) ? $response : [];
     }
 
     /**
@@ -120,7 +120,7 @@ class Odoo
      *
      * @return string Current timezone
      */
-    public function timezone(): string
+    public function timezone(): ?string
     {
         $params = [
             $this->database,
@@ -128,7 +128,9 @@ class Odoo
             $this->password
         ];
 
-        return $this->getClient('common')->call('timezone_get', $params);
+        $response = $this->getClient('common')->call('timezone_get', $params);
+
+        return is_string($response) ? $response : null;
     }
 
     /**
@@ -153,7 +155,7 @@ class Odoo
 
         $response = $this->getClient('object')->call('execute', $params);
 
-        return $response;
+        return is_array($response) ? $response : [];
     }
 
     /**
@@ -164,7 +166,7 @@ class Odoo
      *
      * @return integer Created model id
      */
-    public function create(string $model, array $data): int
+    public function create(string $model, array $data): ?int
     {
         $params = $this->buildParams([
             $model,
@@ -174,7 +176,7 @@ class Odoo
 
         $response = $this->getClient('object')->call('execute', $params);
 
-        return $response;
+        return is_int($response) ? $response : null;
     }
 
     /**
@@ -197,7 +199,7 @@ class Odoo
 
         $response = $this->getClient('object')->call('execute', $params);
 
-        return $response;
+        return is_array($response) ? $response : [];
     }
 
     /**
@@ -229,7 +231,7 @@ class Odoo
 
         $response = $this->getClient('object')->call('execute', $params);
 
-        return $response;
+        return is_array($response) ? $response : [];
     }
 
     /**
@@ -252,7 +254,7 @@ class Odoo
 
         $response = $this->getClient('object')->call('execute', $params);
 
-        return $response;
+        return is_array($response) ? $response : [];
     }
 
     /**
@@ -271,7 +273,9 @@ class Odoo
             $ids
         ]);
 
-        return $this->getClient('object')->call('execute', $params);
+        $response = $this->getClient('object')->call('execute', $params);
+
+        return is_bool($response) ? $response : false;
     }
 
     /**
@@ -302,6 +306,7 @@ class Odoo
         $state = false;
 
         while (!$state) {
+            /** @var array<string> */
             $report = $client->call(
                 'report_get',
                 $this->buildParams([$reportId])
@@ -401,16 +406,18 @@ class Odoo
      *
      * @return int $uid
      */
-    protected function uid(): int
+    protected function uid(): ?int
     {
         if ($this->uid === null) {
             $client = $this->getClient('common');
 
-            $this->uid = $client->call('login', [
+            $response = $client->call('login', [
                 $this->database,
                 $this->user,
                 $this->password
             ]);
+
+            $this->uid = is_int($response) ? $response : null;
         }
 
         return $this->uid;
