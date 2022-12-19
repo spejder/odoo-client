@@ -1,12 +1,20 @@
 # OdooClient
 
-OdooClient is an Odoo client for PHP. It is inspired on [OpenERP API][1] from simbigo and uses a more or less similar API. Instead of an own XML-RPC client it depends on the XML-RPC and XML libraries from Laminas (formerly Zend Framework).
+OdooClient is an Odoo client for PHP. It is inspired on [OpenERP
+API][1] from simbigo and uses a more or less similar API. Instead of
+an own XML-RPC client it depends on the XML-RPC and XML libraries from
+Laminas (formerly Zend Framework).
 
-:information_source: This is a fork of the inactive [jacobsteringa/odoo-client](https://packagist.org/packages/jacobsteringa/odoo-client). Dependencies have been updated and code style modernized to PSR-12. Actual credit for the code goes to [@jacobsteringa](https://github.com/jacobsteringa) :heart:
+:information_source: This is a fork of the inactive
+[jacobsteringa/odoo-client](https://packagist.org/packages/jacobsteringa/odoo-client).
+Dependencies have been updated and code style modernized to
+PSR-12. Actual credit for the code goes to
+[@jacobsteringa](https://github.com/jacobsteringa) :heart:
 
 ## Supported versions
 
-This library should work with Odoo 8 and 9. If you find any any incompatibilities, please create an issue or submit a pull request.
+This library should work with Odoo 8 and 9. If you find any any
+incompatibilities, please create an issue or submit a pull request.
 
 ### Known issues
 
@@ -27,9 +35,12 @@ $password = 'yourpassword';
 $client = new Odoo($url, $database, $user, $password);
 ```
 
-For the client to work you have to include the `/xmlrpc/2` part of the url.
+For the client to work you have to include the `/xmlrpc/2` part of the
+url.
 
-When you need to tweak the HTTP client used by the XML-RPC client, you can inject a custom HTTP client via the constructor or the `Odoo::setHttpClient` method.
+When you need to tweak the HTTP client used by the XML-RPC client, you
+can inject a custom HTTP client via the constructor or the
+`Odoo::setHttpClient` method.
 
 ```php
 use Spejder\Odoo\Odoo;
@@ -61,7 +72,9 @@ Getting timezone information.
 $client->timezone();
 ```
 
-There is no login/authenticate method. The client does authentication for you, that is why the credentials are passed as constructor arguments.
+There is no login/authenticate method. The client does authentication
+for you, that is why the credentials are passed as constructor
+arguments.
 
 ### xmlrpc/2/object endpoint
 
