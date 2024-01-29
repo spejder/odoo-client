@@ -17,7 +17,7 @@
     ],
     "require": {
         "laminas/laminas-xmlrpc": "^2.9",
-        "laminas/laminas-http": "^2.12",
+        "hector-prats/laminas-http": "^2.12",
         "php": ">=7.1"
     },
     "autoload": {
