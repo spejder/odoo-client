@@ -1,5 +1,5 @@
 {
-    "name": "spejder/odoo-client",
+    "name": "hector-prats/odoo-client",
     "type": "library",
     "description": "A PHP Client for Odoo",
     "keywords": [],
