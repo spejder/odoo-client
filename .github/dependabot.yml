@@ -7,8 +7,6 @@ updates:
     time: '04:00'
     timezone: Europe/Copenhagen
   open-pull-requests-limit: 10
-  reviewers:
-  - "spejder/odoo-client"
 - package-ecosystem: composer
   directory: "/"
   schedule:
@@ -19,5 +17,3 @@ updates:
   allow:
   - dependency-type: direct
   - dependency-type: indirect
-  reviewers:
-  - "spejder/odoo-client"
