@@ -1,6 +1,8 @@
 ---
 on: pull_request
 name: YAML
+permissions:
+  contents: read
 
 # Detect if this action is already running, and cancel it.
 # This most likely happened because a second push has been made to a branch.
