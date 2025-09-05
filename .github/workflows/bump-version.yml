@@ -1,3 +1,4 @@
+---
 name: Bump version
 
 on:
@@ -11,36 +12,36 @@ permissions:
 
 jobs:
   bump-version:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v5
-      with:
-        fetch-depth: '0'
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.75.0
-      id: version
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-        WITH_V: true
-        DEFAULT_BUMP: patch
-        DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-    - name: Create release
-      uses: actions/github-script@v8
-      if: ${{ steps.version.outputs.new_tag }} != ""
-      env:
-        RELEASE_TAG: ${{ steps.version.outputs.new_tag }}
-      with:
-        script: |
-          try {
-            await github.rest.repos.createRelease({
-              draft: false,
-              generate_release_notes: true,
-              name: process.env.RELEASE_TAG,
-              owner: context.repo.owner,
-              prerelease: false,
-              repo: context.repo.repo,
-              tag_name: process.env.RELEASE_TAG,
-            });
-          } catch (error) {
-            core.setFailed(error.message);
-          }
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.75.0
+        id: version
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+      - name: Create release
+        uses: actions/github-script@v8
+        if: ${{ steps.version.outputs.new_tag != '' }}
+        env:
+          RELEASE_TAG: ${{ steps.version.outputs.new_tag }}
+        with:
+          script: |
+            try {
+              await github.rest.repos.createRelease({
+                draft: false,
+                generate_release_notes: true,
+                name: process.env.RELEASE_TAG,
+                owner: context.repo.owner,
+                prerelease: false,
+                repo: context.repo.repo,
+                tag_name: process.env.RELEASE_TAG,
+              });
+            } catch (error) {
+              core.setFailed(error.message);
+            }
