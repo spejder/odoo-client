@@ -133,6 +133,12 @@ $ids = $client->search('res.partner', [['email', '=', 'baz@quuz.com']], 0, 1);
 $client->unlink('res.partner', $ids);
 ```
 
+Trigger custom Odoo methods.
+
+```php
+$client->execute('sale.order', 'action_confirm', $ids);
+```
+
 Get report in base64 format.
 
 ```php
