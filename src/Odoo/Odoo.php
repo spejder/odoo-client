@@ -258,6 +258,28 @@ class Odoo
     }
 
     /**
+     * Execute a specific method.
+     *
+     * @param string $model Model
+     * @param string $method Method
+     * @param array<int> $ids Array of model id's
+     *
+     * @return array<mixed>
+     */
+    public function execute(string $model, string $method, array $ids): array
+    {
+        $params = $this->buildParams([
+            $model,
+            $method,
+            $ids
+        ]);
+
+        $response = $this->getClient('object')->call('execute', $params);
+
+        return is_array($response) ? $response : [];
+    }
+
+    /**
      * Unlink model(s)
      *
      * @param string $model Model
