@@ -59,4 +59,4 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v7
       - name: Run markdown lint
-        uses: DavidAnson/markdownlint-cli2-action@v23
+        uses: DavidAnson/markdownlint-cli2-action@v24
